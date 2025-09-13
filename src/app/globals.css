@@ -2,26 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-green: #3a8a3a;
+  --color-green-dark: #2a6a2a;
+  --color-green-light: #4aaa4a;
+  --color-dark: #0f2a2a;
+  --color-dark-blue: #1a2332;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    font-family: var(--font-body);
+    color: #333;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-transparent border-2 border-green-600 text-green-600 font-semibold uppercase tracking-wide transition-all duration-200 hover:bg-green-600 hover:text-white hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .btn-cta {
+    @apply px-8 py-4 bg-green-600 text-white font-bold uppercase tracking-wide transition-all duration-300 hover:bg-green-700 hover:-translate-y-1 hover:shadow-xl;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl text-gray-800 uppercase tracking-wide mb-8;
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .section-label {
+    @apply text-sm md:text-base lg:text-lg font-semibold text-green-600 uppercase tracking-widest mb-6 block;
+    font-family: var(--font-body);
+    opacity: 1;
+  }
 }
 
 @layer utilities {
+  .hero-bg {
+    background-image: url('/images/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .cta-bg {
+    background-image: url('/images/cta-background.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Animaciones para la pantalla de carga */
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes mountain-grow {
+    from { transform: scaleY(0); transform-origin: bottom; }
+    to { transform: scaleY(1); transform-origin: bottom; }
+  }
+
+  @keyframes loading-bar {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out;
+  }
+
+  .animate-fade-in-delay {
+    animation: fade-in 1s ease-out 0.5s both;
+  }
+
+  .animate-fade-in-delay-2 {
+    animation: fade-in 1s ease-out 1s both;
+  }
+
+  .animate-mountain-grow {
+    animation: mountain-grow 0.8s ease-out both;
+  }
+
+  .animate-loading-bar {
+    animation: loading-bar 2s ease-in-out;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
   }
 }
