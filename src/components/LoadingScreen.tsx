@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const LoadingScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,25 +36,19 @@ const LoadingScreen = () => {
       <div className="relative z-10 text-center text-white">
         {/* Logo animado */}
         <div className="mb-8 animate-pulse">
-          <svg
-            width="200"
-            height="80"
-            viewBox="0 0 200 80"
-            xmlns="http://www.w3.org/2000/svg"
-            className="mx-auto"
-          >
-            <text
-              x="100"
-              y="50"
-              fontFamily="var(--font-display)"
-              fontSize="24"
-              fill="currentColor"
-              textAnchor="middle"
-              className="animate-fade-in"
-            >
-              MONTE ÁUREO
-            </text>
-          </svg>
+          <div className="relative">
+            <Image
+              src="/monte-aureo-logo.png"
+              alt="Monte Áureo"
+              width={250}
+              height={80}
+              priority
+              className="h-16 w-auto mx-auto drop-shadow-lg animate-fade-in"
+              style={{
+                filter: 'brightness(1.2) contrast(1.3) drop-shadow(0 0 10px rgba(255,255,255,0.3))'
+              }}
+            />
+          </div>
         </div>
 
         {/* Subtítulo */}

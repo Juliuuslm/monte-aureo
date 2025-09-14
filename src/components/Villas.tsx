@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import AnimatedSection from './AnimatedSection';
 
 interface Villa {
   id: string;
@@ -113,14 +115,24 @@ const VillaCarousel = ({ images, villaName }: { images: string[]; villaName: str
   };
 
   return (
-    <div className="relative group">
+    <motion.div
+      className="relative group"
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.6 }}
+      whileHover={{ scale: 1.02 }}
+    >
       <div className="aspect-[4/3] relative overflow-hidden rounded-lg">
         {images.map((image, index) => (
-          <div
+          <motion.div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-300 ${
+            className={`absolute inset-0 ${
               index === currentImage ? 'opacity-100' : 'opacity-0'
             }`}
+            initial={false}
+            animate={{ opacity: index === currentImage ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
           >
             <Image
               src={image}
@@ -130,58 +142,80 @@ const VillaCarousel = ({ images, villaName }: { images: string[]; villaName: str
               priority={index === 0}
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-          </div>
+          </motion.div>
         ))}
       </div>
 
       {images.length > 1 && (
         <>
-          <button
+          <motion.button
             onClick={prevImage}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-150 hover:bg-opacity-80 hover:scale-110 active:scale-95"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-150 hover:bg-opacity-80"
             aria-label="Imagen anterior"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
           >
             ‹
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={nextImage}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-150 hover:bg-opacity-80 hover:scale-110 active:scale-95"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-150 hover:bg-opacity-80"
             aria-label="Imagen siguiente"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
           >
             ›
-          </button>
+          </motion.button>
 
           {/* Indicators */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
             {images.map((_, index) => (
-              <button
+              <motion.button
                 key={index}
                 onClick={() => setCurrentImage(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-150 hover:scale-125 ${
+                className={`w-3 h-3 rounded-full transition-all duration-150 ${
                   index === currentImage
                     ? 'bg-white shadow-lg'
                     : 'bg-white bg-opacity-60 hover:bg-opacity-80'
                 }`}
                 aria-label={`Ver imagen ${index + 1}`}
+                whileHover={{ scale: 1.25 }}
+                whileTap={{ scale: 0.9 }}
               />
             ))}
           </div>
         </>
       )}
-    </div>
+    </motion.div>
   );
 };
 
-const VillaCard = ({ villa, isReversed }: { villa: Villa; isReversed: boolean }) => {
+const VillaCard = ({ villa, isReversed, index }: { villa: Villa; isReversed: boolean; index: number }) => {
   return (
-    <article className={`grid lg:grid-cols-2 gap-12 items-center mb-20 ${
-      isReversed ? 'lg:grid-flow-col-dense' : ''
-    }`}>
+    <motion.article
+      className={`grid lg:grid-cols-2 gap-12 items-center mb-20 ${
+        isReversed ? 'lg:grid-flow-col-dense' : ''
+      }`}
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-100px' }}
+      transition={{ duration: 0.8, delay: index * 0.2 }}
+    >
       {/* Content */}
-      <div className={isReversed ? 'lg:col-start-2' : ''}>
-        <span className="text-7xl md:text-8xl font-display text-green-600 block mb-4 font-bold opacity-80">
+      <AnimatedSection
+        className={isReversed ? 'lg:col-start-2' : ''}
+        direction={isReversed ? 'right' : 'left'}
+        delay={0.3 + index * 0.1}
+      >
+        <motion.span
+          className="text-7xl md:text-8xl font-display text-green-600 block mb-4 font-bold opacity-80"
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+        >
           {villa.number}
-        </span>
+        </motion.span>
         <h3 className="font-display text-3xl md:text-4xl text-gray-800 mb-6">
           {villa.name}
         </h3>
@@ -190,28 +224,44 @@ const VillaCard = ({ villa, isReversed }: { villa: Villa; isReversed: boolean })
         </p>
 
         <ul className="space-y-3 mb-8">
-          {villa.features.map((feature, index) => (
-            <li key={index} className="text-gray-700 flex items-center">
+          {villa.features.map((feature, featureIndex) => (
+            <motion.li
+              key={featureIndex}
+              className="text-gray-700 flex items-center"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.6 + featureIndex * 0.1 }}
+            >
               <span className="mr-3">{feature}</span>
-            </li>
+            </motion.li>
           ))}
         </ul>
 
-        <Link
-          href="https://wa.me/524421234567"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-primary inline-block"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.8 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
-          VER DISPONIBILIDAD
-        </Link>
-      </div>
+          <Link
+            href="https://wa.me/524421234567"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary inline-block"
+          >
+            VER DISPONIBILIDAD
+          </Link>
+        </motion.div>
+      </AnimatedSection>
 
       {/* Images */}
       <div className={isReversed ? 'lg:col-start-1' : ''}>
         <VillaCarousel images={villa.images} villaName={villa.name} />
       </div>
-    </article>
+    </motion.article>
   );
 };
 
@@ -220,12 +270,12 @@ const Villas = () => {
     <section id="villas" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-20">
+        <AnimatedSection className="text-center mb-20">
           <span className="section-label">NUESTRAS CABAÑAS</span>
           <h2 className="section-title">
             CONTAMOS CON 5 VILLAS PARA SU DESCANSO
           </h2>
-        </div>
+        </AnimatedSection>
 
         {/* Villas */}
         <div>
@@ -234,6 +284,7 @@ const Villas = () => {
               key={villa.id}
               villa={villa}
               isReversed={index % 2 === 1}
+              index={index}
             />
           ))}
         </div>

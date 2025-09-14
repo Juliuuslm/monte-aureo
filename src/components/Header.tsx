@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,30 +29,37 @@ const Header = () => {
       <nav className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <svg
-              width="200"
-              height="40"
-              viewBox="0 0 200 40"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-green-600"
-            >
-              <text
-                x="10"
-                y="28"
-                fontFamily="var(--font-display)"
-                fontSize="18"
-                fill="currentColor"
-              >
-                MONTE ÁUREO
-              </text>
-            </svg>
-          </Link>
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/monte-aureo-logo.png"
+                alt="Monte Áureo - Tu escape perfecto en la naturaleza"
+                width={180}
+                height={60}
+                priority
+                className="h-12 w-auto"
+              />
+            </Link>
+          </motion.div>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <li key={item.href}>
+          <motion.ul
+            className="hidden md:flex items-center space-x-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            {navItems.map((item, index) => (
+              <motion.li
+                key={item.href}
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+              >
                 <Link
                   href={item.href}
                   className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
@@ -58,19 +67,27 @@ const Header = () => {
                 >
                   {item.label}
                 </Link>
-              </li>
+              </motion.li>
             ))}
-          </ul>
+          </motion.ul>
 
           {/* CTA Button */}
-          <Link
-            href="https://wa.me/524421234567"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:block btn-primary relative z-10"
+          <motion.div
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            RESERVAR
-          </Link>
+            <Link
+              href="https://wa.me/524421234567"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:block btn-primary relative z-10"
+            >
+              RESERVAR
+            </Link>
+          </motion.div>
 
           {/* Mobile Menu Button */}
           <button

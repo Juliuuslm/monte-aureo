@@ -1,4 +1,8 @@
+'use client';
+
 import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -46,90 +50,170 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
-          <div>
-            <svg
-              width="120"
-              height="32"
-              viewBox="0 0 120 32"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-white mb-4"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
             >
-              <text
-                x="5"
-                y="24"
-                fontFamily="var(--font-display)"
-                fontSize="18"
-                fill="currentColor"
-              >
-                MONTE ÁUREO
-              </text>
-            </svg>
+              <Image
+                src="/monte-aureo-logo.png"
+                alt="Monte Áureo - Tu escape perfecto en la naturaleza"
+                width={150}
+                height={50}
+                className="h-10 w-auto mb-4 filter brightness-0 invert"
+              />
+            </motion.div>
             <p className="text-gray-400">
               Tu escape perfecto en la naturaleza
             </p>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <h4 className="font-semibold mb-6 text-white">Enlaces rápidos</h4>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
+              {quickLinks.map((link, index) => (
+                <motion.li
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                  whileHover={{ x: 5 }}
+                >
                   <Link
                     href={link.href}
                     className="text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <h4 className="font-semibold mb-6 text-white">Contacto</h4>
             <div className="space-y-3 text-gray-400">
-              <p>📍 Sierra Gorda, Querétaro</p>
-              <p>📞 +52 442 123 4567</p>
-              <p>📧 info@monteaureo.com.mx</p>
-              <Link
-                href="https://wa.me/524421234567"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-green-400 hover:text-green-300 transition-colors duration-200"
+              <motion.p
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                whileHover={{ x: 5 }}
               >
-                💬 WhatsApp
-              </Link>
-            </div>
-          </div>
-
-          {/* Social Media */}
-          <div>
-            <h4 className="font-semibold mb-6 text-white">Síguenos</h4>
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => (
+                📍 Sierra Gorda, Querétaro
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                whileHover={{ x: 5 }}
+              >
+                📞 +52 442 123 4567
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.6 }}
+                whileHover={{ x: 5 }}
+              >
+                📧 info@monteaureo.com.mx
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.7 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
-                  key={social.label}
-                  href={social.href}
+                  href="https://wa.me/524421234567"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                  aria-label={social.label}
+                  className="inline-block text-green-400 hover:text-green-300 transition-colors duration-200"
                 >
-                  {social.icon}
+                  💬 WhatsApp
                 </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Social Media */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <h4 className="font-semibold mb-6 text-white">Síguenos</h4>
+            <div className="flex space-x-4">
+              {socialLinks.map((social, index) => (
+                <motion.div
+                  key={social.label}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                  whileHover={{
+                    scale: 1.2,
+                    rotate: 5,
+                    transition: { duration: 0.2 }
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Link
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors duration-200"
+                    aria-label={social.label}
+                  >
+                    {social.icon}
+                  </Link>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8">
-          <p className="text-center text-gray-400">
+        <motion.div
+          className="border-t border-gray-800 pt-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <motion.p
+            className="text-center text-gray-400"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
             &copy; {currentYear} Cabañas Monte Áureo. Todos los derechos reservados.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </div>
     </footer>
   );

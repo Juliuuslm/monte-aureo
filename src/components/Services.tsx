@@ -1,3 +1,8 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import AnimatedSection from './AnimatedSection';
+
 const Services = () => {
   const services = [
     {
@@ -36,30 +41,74 @@ const Services = () => {
     <section id="servicios" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <AnimatedSection className="text-center mb-16">
           <span className="section-label">SERVICIOS</span>
           <h2 className="section-title">
             TODO LO QUE NECESITAS PARA TU ESTANCIA
           </h2>
-        </div>
+        </AnimatedSection>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="text-center p-8 bg-gray-50 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 hover:-translate-y-2"
+              className="text-center p-8 bg-gray-50 rounded-xl cursor-pointer"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.1,
+                ease: [0.25, 0.25, 0.25, 0.75]
+              }}
+              whileHover={{
+                y: -8,
+                backgroundColor: '#ffffff',
+                scale: 1.02,
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div className="text-5xl mb-6">
+              <motion.div
+                className="text-5xl mb-6"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.3 + index * 0.1,
+                  type: "spring",
+                  bounce: 0.4
+                }}
+                whileHover={{
+                  scale: 1.2,
+                  rotate: [0, -10, 10, 0],
+                  transition: { duration: 0.3 }
+                }}
+              >
                 {service.icon}
-              </div>
-              <h3 className="font-body text-xl font-semibold mb-4 text-gray-800">
+              </motion.div>
+              <motion.h3
+                className="font-body text-xl font-semibold mb-4 text-gray-800"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+              >
                 {service.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
+              </motion.h3>
+              <motion.p
+                className="text-gray-600 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+              >
                 {service.description}
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
           ))}
         </div>
       </div>
