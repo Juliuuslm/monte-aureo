@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+import LazyImage from './LazyImage';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
@@ -165,13 +165,14 @@ const VillaCarousel = ({ images, villaName }: { images: string[]; villaName: str
             animate={{ opacity: index === currentImage ? 1 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            <Image
+            <LazyImage
               src={image}
               alt={`${villaName} - Vista ${index + 1}`}
-              fill
-              className="object-cover"
+              width={800}
+              height={600}
+              className="absolute inset-0 w-full h-full"
               priority={index === 0}
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              quality={90}
             />
           </motion.div>
         ))}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 
 interface NavItem {
@@ -16,7 +16,7 @@ const MobileNavBar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  const navItems: NavItem[] = [
+  const navItems: NavItem[] = useMemo(() => [
     {
       id: 'inicio',
       label: 'Inicio',
@@ -50,7 +50,7 @@ const MobileNavBar = () => {
         window.open('https://wa.me/524421234567', '_blank');
       }
     }
-  ];
+  ], []);
 
   // Hide/show navbar on scroll
   useEffect(() => {
@@ -93,7 +93,7 @@ const MobileNavBar = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navItems]);
 
   const handleNavClick = (item: NavItem) => {
     if (item.action) {
