@@ -19,8 +19,9 @@ const Header = () => {
   const navItems = [
     { href: '#inicio', label: 'Inicio' },
     { href: '#quienes-somos', label: 'Nosotros' },
-    { href: '#villas', label: 'Villas' },
+    { href: '#villas', label: 'Cabañas' },
     { href: '#actividades', label: 'Actividades' },
+    { href: '#testimonios', label: 'Reseñas' },
     { href: '#contacto', label: 'Contacto' },
   ];
 

@@ -36,10 +36,10 @@ const MobileNavBar = () => {
       href: '#actividades'
     },
     {
-      id: 'ubicacion',
-      label: 'Ubicación',
-      icon: '📍',
-      href: '#ubicacion'
+      id: 'testimonios',
+      label: 'Reseñas',
+      icon: '⭐',
+      href: '#testimonios'
     },
     {
       id: 'reservar',

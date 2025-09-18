@@ -107,7 +107,7 @@ const TestimonialsCarousel = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-green-50 to-gray-50">
+    <section id="testimonios" className="py-20 bg-gradient-to-br from-green-50 to-gray-50">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <motion.div
