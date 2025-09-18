@@ -12,7 +12,7 @@ interface BookingActivity {
   location: string;
 }
 
-const generateRandomActivity = (): BookingActivity => {
+const generateRandomActivity = (seed: number): BookingActivity => {
   const activities = [
     {
       message: 'acaba de reservar',
@@ -53,33 +53,50 @@ const generateRandomActivity = (): BookingActivity => {
 
   const timeOptions = ['hace 2 min', 'hace 5 min', 'hace 8 min', 'hace 12 min', 'hace 15 min'];
 
-  const randomActivity = activities[Math.floor(Math.random() * activities.length)];
-  const randomName = names[Math.floor(Math.random() * names.length)];
-  const randomTime = timeOptions[Math.floor(Math.random() * timeOptions.length)];
+  // Usar seed para generar valores determinísticos
+  const activityIndex = seed % activities.length;
+  const nameIndex = (seed * 7) % names.length;
+  const timeIndex = (seed * 11) % timeOptions.length;
+
+  const selectedActivity = activities[activityIndex];
+  const selectedName = names[nameIndex];
+  const selectedTime = timeOptions[timeIndex];
 
   return {
-    id: Math.random().toString(),
-    message: `${randomName} ${randomActivity.message}`,
-    villa: randomActivity.villa,
-    timeAgo: randomTime,
-    type: randomActivity.type,
-    location: randomActivity.location
+    id: seed.toString(),
+    message: `${selectedName} ${selectedActivity.message}`,
+    villa: selectedActivity.villa,
+    timeAgo: selectedTime,
+    type: selectedActivity.type,
+    location: selectedActivity.location
   };
 };
 
 const BookingCounter = () => {
   const [currentActivity, setCurrentActivity] = useState<BookingActivity | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [activitySeed, setActivitySeed] = useState(0);
   const [stats, setStats] = useState({
     todayBookings: 3,
     weeklyBookings: 12,
     currentViewers: 8
   });
 
+  // Prevenir hydration mismatch
   useEffect(() => {
+    setMounted(true);
+    setActivitySeed(Date.now() % 1000); // Seed inicial basado en tiempo
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    let currentSeed = activitySeed;
+
     // Show first notification after 3 seconds
     const initialTimer = setTimeout(() => {
-      setCurrentActivity(generateRandomActivity());
+      setCurrentActivity(generateRandomActivity(currentSeed));
       setIsVisible(true);
     }, 3000);
 
@@ -88,7 +105,9 @@ const BookingCounter = () => {
       setIsVisible(false);
 
       setTimeout(() => {
-        setCurrentActivity(generateRandomActivity());
+        currentSeed += 1;
+        setActivitySeed(currentSeed);
+        setCurrentActivity(generateRandomActivity(currentSeed));
         setIsVisible(true);
 
         // Update stats occasionally
@@ -106,7 +125,7 @@ const BookingCounter = () => {
       clearTimeout(initialTimer);
       clearInterval(interval);
     };
-  }, []);
+  }, [mounted, activitySeed]);
 
   const getIcon = (type: string) => {
     switch (type) {

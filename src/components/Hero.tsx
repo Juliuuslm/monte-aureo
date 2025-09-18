@@ -124,27 +124,35 @@ const Hero = () => {
         className="absolute inset-0 pointer-events-none overflow-hidden"
         style={{ y: floatingParticlesY }}
       >
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 0.8, 0.3],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
+        {[...Array(15)].map((_, i) => {
+          // Generar valores determinísticos basados en índice
+          const left = (i * 23.7) % 100;
+          const top = (i * 41.3) % 100;
+          const duration = 3 + (i % 3);
+          const delay = (i * 0.3) % 2;
+
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full opacity-30"
+              style={{
+                left: `${left}%`,
+                top: `${top}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.3, 0.8, 0.3],
+                scale: [1, 1.5, 1],
+              }}
+              transition={{
+                duration,
+                repeat: Infinity,
+                delay,
+                ease: "easeInOut"
+              }}
+            />
+          );
+        })}
       </motion.div>
 
       {/* Floating leaves/elements */}

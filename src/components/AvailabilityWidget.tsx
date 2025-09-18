@@ -47,7 +47,10 @@ const AvailabilityWidget = () => {
     e.preventDefault();
     if (contactInfo.name && contactInfo.phone) {
       // Aquí iría la lógica para enviar los datos
-      console.log('Enviando consulta:', { formData, contactInfo });
+      // Solo log en desarrollo
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Enviando consulta:', { formData, contactInfo });
+      }
       setStep('success');
 
       // Generar mensaje de WhatsApp

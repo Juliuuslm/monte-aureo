@@ -24,7 +24,9 @@ const LoadingScreen = () => {
 
     // Timer de seguridad - máximo 5 segundos
     const maxTimer = setTimeout(() => {
-      console.warn('Loading screen timeout - forcing hide');
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Loading screen timeout - forcing hide');
+      }
       hideLoadingScreen();
     }, 5000);
 
@@ -106,7 +108,9 @@ const LoadingScreen = () => {
               }}
               onLoad={() => setIsImageLoaded(true)}
               onError={() => {
-                console.error('Logo failed to load');
+                if (process.env.NODE_ENV === 'development') {
+                  console.error('Logo failed to load');
+                }
                 setIsImageLoaded(true); // Continuar aunque falle la imagen
               }}
             />
