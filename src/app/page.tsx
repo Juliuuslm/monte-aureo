@@ -7,6 +7,7 @@ import Services from '@/components/Services';
 import Location from '@/components/Location';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
+import AvailabilityWidget from '@/components/AvailabilityWidget';
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <CTA />
       </main>
       <Footer />
+      <AvailabilityWidget />
     </>
   );
 }

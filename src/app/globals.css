@@ -24,30 +24,31 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 400;
-    text-transform: uppercase;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-transparent border-2 border-green-600 text-green-600 font-semibold uppercase tracking-wide transition-all duration-200 hover:bg-green-600 hover:text-white hover:-translate-y-1 hover:shadow-lg;
+    @apply px-6 py-3 bg-transparent border-2 border-green-600 text-green-600 font-semibold tracking-normal transition-all duration-200 hover:bg-green-600 hover:text-white hover:-translate-y-1 hover:shadow-lg;
   }
 
   .btn-cta {
-    @apply px-8 py-4 bg-green-600 text-white font-bold uppercase tracking-wide transition-all duration-300 hover:bg-green-700 hover:-translate-y-1 hover:shadow-xl;
+    @apply px-8 py-4 bg-green-600 text-white font-bold tracking-normal transition-all duration-300 hover:bg-green-700 hover:-translate-y-1 hover:shadow-xl;
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl lg:text-6xl text-gray-800 uppercase tracking-wide mb-8;
+    @apply text-4xl md:text-5xl lg:text-6xl text-gray-800 tracking-normal mb-8;
     font-family: var(--font-display);
     font-weight: 400;
     line-height: 1.1;
+    text-transform: capitalize;
   }
 
   .section-label {
-    @apply text-sm md:text-base lg:text-lg font-semibold text-green-600 uppercase tracking-widest mb-6 block;
+    @apply text-sm md:text-base lg:text-lg font-semibold text-green-600 tracking-wide mb-6 block;
     font-family: var(--font-body);
     opacity: 1;
+    text-transform: capitalize;
   }
 }
 

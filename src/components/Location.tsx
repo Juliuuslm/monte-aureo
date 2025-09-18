@@ -29,9 +29,9 @@ const Location = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <AnimatedSection className="text-center mb-16">
-          <span className="section-label">UBICACIÓN</span>
+          <span className="section-label">Cómo llegar</span>
           <h2 className="section-title">
-            ENCUÉNTRANOS EN LA SIERRA GORDA
+            Encuéntranos en Sierra Gorda
           </h2>
         </AnimatedSection>
 
@@ -40,7 +40,7 @@ const Location = () => {
           {/* Location Info */}
           <AnimatedSection direction="left" delay={0.2}>
             <motion.h3
-              className="font-display text-2xl text-gray-800 mb-6 uppercase"
+              className="font-display text-2xl text-gray-800 mb-6"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}

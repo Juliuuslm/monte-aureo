@@ -39,12 +39,12 @@ const Activities = () => {
   ];
 
   const highlights = [
-    'TÉ POR LAS MAÑANAS',
-    'MOMENTOS EN FAMILIA',
-    'NOCHES INCREÍBLES',
-    'ADJUNTAS DEL RÍO AYUTLA',
-    'MANANTIALES DE CONCÁ',
-    'CASCADA "EL CHUVEJE"'
+    'té por las mañanas',
+    'momentos en familia',
+    'noches mágicas',
+    'adjuntas del río Ayutla',
+    'manantiales de Concá',
+    'cascada El Chuveje'
   ];
 
   return (
@@ -52,11 +52,11 @@ const Activities = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <AnimatedSection className="text-center mb-16">
-          <h2 className="font-display text-4xl md:text-6xl text-gray-800 uppercase tracking-wide mb-8">
-            ACTIVIDADES
+          <h2 className="font-display text-4xl md:text-6xl text-gray-800 tracking-normal mb-8">
+            Actividades y experiencias
           </h2>
           <p className="text-lg md:text-xl text-gray-700 max-w-5xl mx-auto leading-relaxed">
-            DISFRUTA DE{' '}
+            Disfruta de{' '}
             {highlights.map((highlight, index) => (
               <motion.span
                 key={index}

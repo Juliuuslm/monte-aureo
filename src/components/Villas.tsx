@@ -19,8 +19,8 @@ const villasData: Villa[] = [
   {
     id: 'colibri',
     number: '1',
-    name: 'VILLA COLIBRÍ',
-    description: 'Perfecta para parejas que buscan intimidad y romance. Tres cabañas equipadas con todas las comodidades para una estancia inolvidable.',
+    name: 'Villa Colibrí',
+    description: 'Ideal para parejas. Un espacio íntimo con vistas al bosque, chimenea para las noches frías y la tranquilidad que buscas para reconectar.',
     features: [
       '👥 Capacidad: 2 personas',
       '🛏️ Cama King Size',
@@ -36,8 +36,8 @@ const villasData: Villa[] = [
   {
     id: 'mariposa',
     number: '2',
-    name: 'VILLA MARIPOSA',
-    description: 'Diseñada para parejas, combina elegancia y naturaleza. Tres cabañas con vistas espectaculares al bosque.',
+    name: 'Villa Mariposa',
+    description: 'Nuestra cabaña más popular entre parejas. Con jacuzzi privado y una terraza donde los atardeceres se vuelven inolvidables.',
     features: [
       '👥 Capacidad: 2 personas',
       '🌿 Vista al bosque',
@@ -53,8 +53,8 @@ const villasData: Villa[] = [
   {
     id: 'venado',
     number: '3',
-    name: 'VILLA VENADO',
-    description: 'Ideal para familias pequeñas. Tres cabañas familiares con capacidad para 4 personas cada una.',
+    name: 'Villa Venado',
+    description: 'Perfecta para familias de hasta 4 personas. Dos recámaras, cocina equipada y un jardín donde los niños pueden jugar seguros.',
     features: [
       '👨‍👩‍👧‍👦 Capacidad: 4 personas',
       '🛏️ 2 recámaras',
@@ -70,8 +70,8 @@ const villasData: Villa[] = [
   {
     id: 'oso',
     number: '4',
-    name: 'VILLA OSO',
-    description: 'Perfecta para grupos familiares grandes. Tres cabañas espaciosas con capacidad para 6 personas.',
+    name: 'Villa Oso',
+    description: 'Nuestra cabaña más amplia, ideal para familias grandes o grupos de amigos. Tres recámaras y espacio para compartir grandes momentos.',
     features: [
       '👨‍👩‍👧‍👦 Capacidad: 6 personas',
       '🛏️ 3 recámaras',
@@ -87,8 +87,8 @@ const villasData: Villa[] = [
   {
     id: 'casita',
     number: '5',
-    name: 'LA CASITA',
-    description: 'Casa tradicional de adobe de 1927, restaurada con amor para preservar su encanto histórico mientras ofrece comodidades modernas.',
+    name: 'La Casita',
+    description: 'Nuestra joya histórica. Una casa de adobe de 1927 restaurada con cariño, que conserva su alma original pero con todas las comodidades actuales.',
     features: [
       '🏛️ Construcción de 1927',
       '🏡 Adobe tradicional',
@@ -252,7 +252,7 @@ const VillaCard = ({ villa, isReversed, index }: { villa: Villa; isReversed: boo
             rel="noopener noreferrer"
             className="btn-primary inline-block"
           >
-            VER DISPONIBILIDAD
+            Consultar disponibilidad
           </Link>
         </motion.div>
       </AnimatedSection>
@@ -271,9 +271,9 @@ const Villas = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <AnimatedSection className="text-center mb-20">
-          <span className="section-label">NUESTRAS CABAÑAS</span>
+          <span className="section-label">Nuestras cabañas</span>
           <h2 className="section-title">
-            CONTAMOS CON 5 VILLAS PARA SU DESCANSO
+            Cinco espacios únicos para tu estadía
           </h2>
         </AnimatedSection>
 

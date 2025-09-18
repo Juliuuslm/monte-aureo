@@ -42,9 +42,9 @@ const Services = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <AnimatedSection className="text-center mb-16">
-          <span className="section-label">SERVICIOS</span>
+          <span className="section-label">Servicios incluidos</span>
           <h2 className="section-title">
-            TODO LO QUE NECESITAS PARA TU ESTANCIA
+            Todo lo que necesitas para disfrutar
           </h2>
         </AnimatedSection>
 

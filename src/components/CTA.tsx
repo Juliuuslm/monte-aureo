@@ -18,13 +18,13 @@ const CTA = () => {
       {/* Content */}
       <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
         <motion.h2
-          className="font-display text-4xl md:text-6xl mb-6 uppercase tracking-wide"
+          className="font-display text-4xl md:text-6xl mb-6 tracking-normal"
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          TU ESCAPE PERFECTO EN LA NATURALEZA
+¿Listo para desconectar?
         </motion.h2>
         <motion.p
           className="text-xl md:text-2xl font-light mb-12"
@@ -33,7 +33,7 @@ const CTA = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          Reserva ahora y vive una experiencia inolvidable
+Tu próxima aventura familiar en Sierra Gorda te está esperando
         </motion.p>
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -49,7 +49,7 @@ const CTA = () => {
             rel="noopener noreferrer"
             className="btn-cta text-xl px-12 py-4 inline-block"
           >
-            RESERVAR AHORA
+            Consultar disponibilidad
           </Link>
         </motion.div>
       </div>

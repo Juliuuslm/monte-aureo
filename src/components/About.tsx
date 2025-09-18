@@ -4,9 +4,9 @@ import AnimatedCounter from './AnimatedCounter';
 
 const About = () => {
   const stats = [
-    { number: 13, label: 'AÑOS DE EXPERIENCIA' },
-    { number: 10, label: 'VILLAS DISPONIBLES' },
-    { number: 5, label: 'TIPOS DE CABAÑAS' },
+    { number: 13, label: 'Años de experiencia' },
+    { number: 5, label: 'Cabañas únicas' },
+    { number: 20, label: 'Huéspedes max' },
   ];
 
   return (
@@ -14,9 +14,9 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <AnimatedSection className="text-center mb-16">
-          <span className="section-label">¿QUIÉNES SOMOS?</span>
+          <span className="section-label">Nuestra historia</span>
           <h2 className="section-title max-w-4xl mx-auto">
-            CABAÑAS PREMIUM UBICADAS EN LA BIOSFERA SIERRA GORDA
+            Monte Áureo en la Sierra Gorda de Querétaro
           </h2>
         </AnimatedSection>
 
@@ -27,15 +27,16 @@ const About = () => {
             <AnimatedSection direction="left" delay={0.2}>
               <div className="space-y-6 text-gray-700 text-lg md:text-xl leading-relaxed mb-12">
                 <p>
-                  Somos un refugio exclusivo en el corazón de la Sierra Gorda de Querétaro,
-                  donde la naturaleza y el confort se encuentran para crear experiencias inolvidables.
-                  Desde hace más de una década, hemos acogido a viajeros que buscan desconectar
-                  del ritmo urbano y reconectar con lo esencial.
+                  En el corazón de la Reserva de la Biosfera Sierra Gorda, Monte Áureo
+                  nació de la visión de crear un espacio donde las familias pudieran
+                  reconectar entre ellas y con la naturaleza. Durante 13 años, hemos
+                  sido el hogar temporal de miles de familias que buscan pausar y respirar.
                 </p>
                 <p>
-                  Nuestras cabañas están diseñadas para integrarse armoniosamente con el entorno natural,
-                  ofreciendo todas las comodidades modernas mientras preservamos la autenticidad
-                  del paisaje serrano.
+                  Cada una de nuestras cinco cabañas tiene su propia personalidad, pero todas
+                  comparten el mismo espíritu: comodidad auténtica sin lujos innecesarios,
+                  rodeadas de los sonidos del bosque y la vista de montañas que cambian
+                  de color con las horas del día.
                 </p>
               </div>
             </AnimatedSection>
@@ -53,7 +54,7 @@ const About = () => {
                     value={stat.number}
                     className="text-5xl md:text-6xl font-display text-green-600 mb-3 font-normal"
                   />
-                  <div className="text-xs md:text-sm font-semibold text-gray-600 uppercase tracking-wide">
+                  <div className="text-xs md:text-sm font-semibold text-gray-600 tracking-wide">
                     {stat.label}
                   </div>
                 </AnimatedSection>

@@ -85,7 +85,7 @@ const Header = () => {
               rel="noopener noreferrer"
               className="hidden md:block btn-primary relative z-10"
             >
-              RESERVAR
+              Consultar
             </Link>
           </motion.div>
 
@@ -129,7 +129,7 @@ const Header = () => {
               className="btn-primary mt-8"
               onClick={closeMenu}
             >
-              RESERVAR
+              Consultar
             </Link>
           </div>
         </div>

@@ -12,21 +12,21 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <motion.span
-          className="block text-lg md:text-xl font-body font-medium tracking-widest mb-6 opacity-95"
+          className="block text-lg md:text-xl font-body font-medium tracking-wide mb-6 opacity-95"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 0.95, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          CABAÑAS
+          Cabañas familiares
         </motion.span>
 
         <motion.h1
-          className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display font-normal tracking-wider mb-8 whitespace-nowrap"
+          className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display font-normal tracking-wide mb-8 whitespace-nowrap"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
         >
-          MONTE ÁUREO
+          Monte Áureo
         </motion.h1>
 
         <motion.p
@@ -35,7 +35,7 @@ const Hero = () => {
           animate={{ opacity: 0.95, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          Tu escape perfecto en la naturaleza
+          Desconecta rodeado de naturaleza auténtica en Sierra Gorda
         </motion.p>
 
         <motion.div
@@ -49,7 +49,7 @@ const Hero = () => {
             href="#villas"
             className="inline-block btn-cta text-lg px-12 py-4"
           >
-            Descubre nuestras villas
+            Ver nuestras cabañas
           </Link>
         </motion.div>
       </div>
@@ -66,7 +66,7 @@ const Hero = () => {
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          Desliza
+          Explora
         </motion.span>
         <motion.div
           className="w-px h-8 bg-white mx-auto opacity-70"
