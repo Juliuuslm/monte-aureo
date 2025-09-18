@@ -61,11 +61,11 @@ const Footer = () => {
               transition={{ duration: 0.2 }}
             >
               <Image
-                src="/monte-aureo-logo.png"
+                src="/monte-aureo-logo-white.png"
                 alt="Monte Áureo - Tu escape perfecto en la naturaleza"
                 width={150}
                 height={50}
-                className="h-10 w-auto mb-4 filter brightness-0 invert"
+                className="h-10 w-auto mb-4"
               />
             </motion.div>
             <p className="text-gray-400">
