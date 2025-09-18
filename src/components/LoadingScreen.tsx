@@ -1,27 +1,75 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 
 const LoadingScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Para evitar hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const hideLoadingScreen = useCallback(() => {
+    setIsLoading(false);
+    document.body.style.overflow = 'visible';
+  }, []);
 
   useEffect(() => {
-    // Mínimo 2 segundos de pantalla de carga
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      // Permitir scroll cuando la carga termina
-      document.body.style.overflow = 'visible';
-    }, 2000);
-
     // Bloquear scroll durante la carga
     document.body.style.overflow = 'hidden';
 
+    // Timer de seguridad - máximo 5 segundos
+    const maxTimer = setTimeout(() => {
+      console.warn('Loading screen timeout - forcing hide');
+      hideLoadingScreen();
+    }, 5000);
+
+    // Timer mínimo - al menos 1.5 segundos + carga de imagen
+    const minTimer = setTimeout(() => {
+      if (isImageLoaded) {
+        hideLoadingScreen();
+      }
+    }, 1500);
+
+    // Escape manual - presionar cualquier tecla después de 3 segundos
+    const escapeTimer = setTimeout(() => {
+      const handleEscape = () => {
+        hideLoadingScreen();
+        document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('click', handleEscape);
+      };
+
+      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('click', handleEscape);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('click', handleEscape);
+      };
+    }, 3000);
+
     return () => {
-      clearTimeout(timer);
+      clearTimeout(maxTimer);
+      clearTimeout(minTimer);
+      clearTimeout(escapeTimer);
       document.body.style.overflow = 'visible';
     };
-  }, []);
+  }, [isImageLoaded, hideLoadingScreen]);
+
+  // Verificar cuando la imagen se carga
+  useEffect(() => {
+    if (isImageLoaded && mounted) {
+      const timer = setTimeout(() => {
+        hideLoadingScreen();
+      }, 800); // Pequeño delay después de cargar imagen
+
+      return () => clearTimeout(timer);
+    }
+  }, [isImageLoaded, mounted, hideLoadingScreen]);
 
   if (!isLoading) return null;
 
@@ -31,6 +79,15 @@ const LoadingScreen = () => {
       <div className="absolute inset-0 opacity-20">
         <div className="w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
       </div>
+
+      {/* Skip button - aparece después de 3 segundos */}
+      <button
+        className="absolute top-4 right-4 text-white/70 hover:text-white text-sm z-20 transition-opacity duration-300 opacity-0 animate-fade-in-delay-2"
+        onClick={hideLoadingScreen}
+        aria-label="Saltar pantalla de carga"
+      >
+        Saltar ✕
+      </button>
 
       {/* Contenido principal */}
       <div className="relative z-10 text-center text-white">
@@ -46,6 +103,11 @@ const LoadingScreen = () => {
               className="h-16 w-auto mx-auto drop-shadow-lg animate-fade-in"
               style={{
                 filter: 'brightness(1.2) contrast(1.3) drop-shadow(0 0 10px rgba(255,255,255,0.3))'
+              }}
+              onLoad={() => setIsImageLoaded(true)}
+              onError={() => {
+                console.error('Logo failed to load');
+                setIsImageLoaded(true); // Continuar aunque falle la imagen
               }}
             />
           </div>
@@ -85,21 +147,31 @@ const LoadingScreen = () => {
         </p>
       </div>
 
-      {/* Partículas flotantes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-30 animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
+      {/* Partículas flotantes - solo después de montarse */}
+      {mounted && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(20)].map((_, i) => {
+            // Generar valores consistentes basados en el índice para evitar hydration mismatch
+            const left = (i * 5.26) % 100; // Distribución pseudo-aleatoria
+            const top = (i * 7.89) % 100;
+            const delay = (i * 0.15) % 3;
+            const duration = 3 + (i % 3);
+
+            return (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-white rounded-full opacity-30 animate-float"
+                style={{
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  animationDelay: `${delay}s`,
+                  animationDuration: `${duration}s`
+                }}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
