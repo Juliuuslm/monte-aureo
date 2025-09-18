@@ -136,7 +136,7 @@ const Footer = () => {
                 transition={{ duration: 0.4, delay: 0.6 }}
                 whileHover={{ x: 5 }}
               >
-                📧 info@monteaureo.com.mx
+                ✉️ info@monteaureo.com.mx
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -152,7 +152,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="inline-block text-green-400 hover:text-green-300 transition-colors duration-200"
                 >
-                  💬 WhatsApp
+                  📱 WhatsApp
                 </Link>
               </motion.div>
             </div>
