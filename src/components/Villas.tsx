@@ -105,6 +105,8 @@ const villasData: Villa[] = [
 
 const VillaCarousel = ({ images, villaName }: { images: string[]; villaName: string }) => {
   const [currentImage, setCurrentImage] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const nextImage = () => {
     setCurrentImage((prev) => (prev + 1) % images.length);
@@ -112,6 +114,30 @@ const VillaCarousel = ({ images, villaName }: { images: string[]; villaName: str
 
   const prevImage = () => {
     setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  // Handle touch events for swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextImage();
+    } else if (isRightSwipe) {
+      prevImage();
+    }
   };
 
   return (
@@ -123,7 +149,12 @@ const VillaCarousel = ({ images, villaName }: { images: string[]; villaName: str
       transition={{ duration: 0.6 }}
       whileHover={{ scale: 1.02 }}
     >
-      <div className="aspect-[4/3] relative overflow-hidden rounded-lg">
+      <div
+        className="aspect-[4/3] relative overflow-hidden rounded-lg touch-pan-y"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         {images.map((image, index) => (
           <motion.div
             key={index}
@@ -150,7 +181,7 @@ const VillaCarousel = ({ images, villaName }: { images: string[]; villaName: str
         <>
           <motion.button
             onClick={prevImage}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-150 hover:bg-opacity-80"
+            className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-70 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center opacity-80 md:opacity-0 md:group-hover:opacity-100 transition-all duration-150 hover:bg-opacity-80 z-10"
             aria-label="Imagen anterior"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -159,7 +190,7 @@ const VillaCarousel = ({ images, villaName }: { images: string[]; villaName: str
           </motion.button>
           <motion.button
             onClick={nextImage}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-150 hover:bg-opacity-80"
+            className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-70 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center opacity-80 md:opacity-0 md:group-hover:opacity-100 transition-all duration-150 hover:bg-opacity-80 z-10"
             aria-label="Imagen siguiente"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -168,7 +199,7 @@ const VillaCarousel = ({ images, villaName }: { images: string[]; villaName: str
           </motion.button>
 
           {/* Indicators */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
+          <div className="absolute bottom-3 md:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 md:space-x-3">
             {images.map((_, index) => (
               <motion.button
                 key={index}
