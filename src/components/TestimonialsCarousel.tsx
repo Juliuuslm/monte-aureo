@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 interface Testimonial {
   id: string;
@@ -144,8 +145,15 @@ const TestimonialsCarousel = () => {
                 <div className="flex flex-col md:flex-row items-start gap-8">
                   {/* Avatar and info */}
                   <div className="flex-shrink-0 text-center md:text-left">
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white text-2xl font-bold mb-4 mx-auto md:mx-0">
-                      {testimonials[currentIndex].name.split(' ')[0][0]}{testimonials[currentIndex].name.split(' ')[1] ? testimonials[currentIndex].name.split(' ')[1][0] : ''}
+                    <div className="w-20 h-20 rounded-full overflow-hidden mb-4 mx-auto md:mx-0 shadow-lg">
+                      <Image
+                        src={testimonials[currentIndex].avatar}
+                        alt={testimonials[currentIndex].name}
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-cover"
+                        priority={currentIndex === 0}
+                      />
                     </div>
                     <h3 className="font-semibold text-gray-800 text-lg mb-1">
                       {testimonials[currentIndex].name}

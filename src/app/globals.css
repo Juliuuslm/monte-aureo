@@ -54,15 +54,28 @@
 
 @layer utilities {
   .hero-bg {
-    background-image: url('/images/hero-background.jpg');
+    background-image: url('/images/hero-background.webp');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* Fallback for browsers that don't support WebP */
+  .no-webp .hero-bg {
+    background-image: url('/images/hero-background.jpg');
   }
 
   .cta-bg {
-    background-image: url('/images/cta-background.jpg');
+    background-image: url('/images/cta-background.webp');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Fallback for browsers that don't support WebP */
+  .no-webp .cta-bg {
+    background-image: url('/images/cta-background.jpg');
   }
 
   .text-balance {
